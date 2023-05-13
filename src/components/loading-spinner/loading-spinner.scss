@@ -1,0 +1,11 @@
+.loading-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+
+  .loading-spinner {
+    flex: 1 1 auto;
+    font-size: 3rem;
+  }
+}

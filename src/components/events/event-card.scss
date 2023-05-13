@@ -1,0 +1,39 @@
+$primary-blue: #557A95;
+$secondary-blue: #7395AE;
+$primary-gray: #5D5C61;
+$secondary-gray: #379683;
+$primary-tan: #B1A296;
+
+.callout {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  &.fill-height {
+    height: 100%;
+  }
+}
+
+.event-card-header {
+  border-top-left-radius: 15px;
+  border: 2px solid black;
+  background-color: $primary-blue;
+  color: white;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.event-card {
+  margin-bottom: 1em;
+}
+
+.callout-flex-content {
+  padding: 0 15px 0;
+  &.primary {
+    border-bottom-right-radius: 15px;
+    border: 2px solid black;
+    background-color: $primary-blue;
+    color: black;
+  }
+}

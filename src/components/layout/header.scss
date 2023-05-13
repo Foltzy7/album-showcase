@@ -1,0 +1,11 @@
+$primary-tan: #bf8a60;
+
+.nav-primary {
+  background-color: $primary-tan;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}

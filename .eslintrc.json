@@ -1,0 +1,17 @@
+{
+  "plugins": ["lodash"],
+  "extends": ["react-app"],
+  "ignorePatterns": ["serviceWorker.js", "**/build/*", "**/e2e/*"],
+  "rules": {
+    "prefer-const": "error",
+    "no-var": "error",
+    "no-duplicate-imports": "error",
+    "eqeqeq": "warn",
+    "no-console": "warn",
+    "no-return-await": "error",
+    "curly": "error",
+    "react/no-unused-state": "error",
+    "react/no-access-state-in-setstate": "error",
+    "lodash/import-scope": [2, "method"]
+  }
+}
