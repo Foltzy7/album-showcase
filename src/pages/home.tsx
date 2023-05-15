@@ -5,7 +5,7 @@ import axios from "axios";
 import PageContent from "components/layout/pagecontent";
 import PhotoAlbumDisplay from "../components/photo-album/photo-album-display";
 import { useRecoilState } from "recoil";
-import { photosState, thumbnailState } from "../store/recoilStore";
+import { photosState } from "../store/recoilStore";
 import { Photo } from "react-photo-album";
 
 export interface LeanPhotoObject {
@@ -19,7 +19,6 @@ export interface LeanPhotoObject {
 export default function Home() {
   const [selectedAlbum, setSelectedAlbum] = useState(1);
   const [photos, setPhotos] = useRecoilState(photosState);
-  const [thumbnails, setThumbnails] = useRecoilState(thumbnailState);
   const [fetched, setFetched] = useState(false);
 
   const noPhotos = !fetched || photos?.length === 0;
@@ -39,7 +38,7 @@ export default function Home() {
       setPhotos(
         photoArray.map((item: LeanPhotoObject) => {
           return {
-            src: thumbnails ? item.thumbnailUrl : item.url,
+            src: item.url,
             width: 1,
             height: 1,
             title: `${item.title}`,
