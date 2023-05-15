@@ -17,7 +17,18 @@ function Aspirations() {
             <li>Get min/max albums dynamically</li>
             <li>Pagination of images to reduce page load</li>
             <li>Utilize thumbnails to display more items on the page</li>
+            <li>
+              Handle non-square photos and ensure they displayed in proper
+              proportions
+            </li>
             <li>Added more testing around photo modal logic</li>
+          </ul>
+          <h2>CI/CD</h2>
+          <ul>
+            <li>Enable Dependabot automatic dependency updates</li>
+            <li>Update out of date dependencies</li>
+            <li>Run cypress tests on a cron</li>
+            <li>Require passing unit tests for PRs</li>
           </ul>
         </div>
         <a

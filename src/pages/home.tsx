@@ -40,8 +40,8 @@ export default function Home() {
         photoArray.map((item: LeanPhotoObject) => {
           return {
             src: thumbnails ? item.thumbnailUrl : item.url,
-            width: 600,
-            height: 600,
+            width: 1,
+            height: 1,
             title: `${item.title}`,
             alt: `${item.id}`,
           } as Photo;
