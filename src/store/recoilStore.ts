@@ -1,6 +1,7 @@
-import {atom} from "recoil";
+import { atom } from "recoil";
+import { Photo } from "react-photo-album";
 
-export const VIPState = atom({
-    key: 'VIPState',
-    default: false,
+export const photosState = atom({
+  key: "photos",
+  default: [] as Photo[],
 });

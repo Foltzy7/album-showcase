@@ -2,28 +2,27 @@ import React, { useEffect, useState } from "react";
 import "../components/page/page.scss";
 import "./home.scss";
 import axios from "axios";
-import PhotoAlbum from "react-photo-album";
 import PageContent from "components/layout/pagecontent";
+import PhotoAlbumDisplay from "../components/photo-album/photo-album-display";
+import { useRecoilState } from "recoil";
+import { photosState } from "../store/recoilStore";
+import { Photo } from "react-photo-album";
 
-export interface photoObject {
+export interface LeanPhotoObject {
   albumId: number;
   id: number;
   title: string;
   url: string;
   thumbnailUrl: string;
-  src?: string;
-  width?: number;
-  height?: number;
 }
 
 export default function Home() {
   const [selectedAlbum, setSelectedAlbum] = useState(1);
-  const [photos, setPhotos] = useState([]);
-  let fetched = false;
+  const [photos, setPhotos] = useRecoilState(photosState);
+  const [fetched, setFetched] = useState(false);
 
-  const noPhotos = () => {
-    return fetched && photos?.length === 0;
-  };
+  const noPhotos = !fetched || photos?.length === 0;
+
   useEffect(() => {
     const fetchData = async () => {
       let photosResponse: any = { data: [] };
@@ -32,19 +31,27 @@ export default function Home() {
           `https://jsonplaceholder.typicode.com/photos?albumId=${selectedAlbum}`
         );
       } catch (e) {
-        console.warn("error retrieveing photos");
+        // eslint-disable-next-line no-console
+        console.warn("error retrieving photos");
       }
       const photoArray = photosResponse.data;
       setPhotos(
-        photoArray.map((item: photoObject) => {
-          return { src: item.url, width: 1, height: 1 };
+        photoArray.map((item: LeanPhotoObject) => {
+          return {
+            src: item.url,
+            width: 1,
+            height: 1,
+            title: `${item.title}`,
+            alt: `${item.id}`,
+          } as Photo;
         })
       );
-      fetched = true;
+      setFetched(true);
     };
 
     fetchData();
-  }, [selectedAlbum, setSelectedAlbum]);
+  }, [selectedAlbum, setSelectedAlbum, setPhotos]);
+
   return (
     <PageContent className={"content-primary"}>
       <div>
@@ -57,20 +64,16 @@ export default function Home() {
               aria-label="Selected Album"
               type="number"
               className="form-control mb-3"
-              min="0"
+              min="1"
               max="100"
               id="selectedAlbumInput"
               data-testid="selectedAlbumInput"
-              value={selectedAlbum}
+              defaultValue={"1"}
               onChange={(e) => setSelectedAlbum(+e.target.value)}
             />
           </div>
         </div>
-        {!noPhotos && (
-          <div data-testid="photoAlbum">
-            <PhotoAlbum photos={photos} layout={"masonry"} />
-          </div>
-        )}
+        {!noPhotos && <PhotoAlbumDisplay />}
         {noPhotos && (
           <div className={"alert alert-danger"} role={"alert"}>
             No photos could be retrieved for the selected album

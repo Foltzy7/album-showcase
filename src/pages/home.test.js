@@ -5,6 +5,7 @@ import { render, screen } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { waitFor } from "@babel/core/lib/gensync-utils/async";
 import userEvent from "@testing-library/user-event";
+import { RecoilRoot } from "recoil";
 
 jest.mock("axios");
 
@@ -13,7 +14,11 @@ describe("home", function () {
     const mockReturn = { data: [{ src: "google.com", width: 1, height: 1 }] };
     axios.get.mockResolvedValue(mockReturn);
     await act(async () => {
-      render(<Home />);
+      render(
+        <RecoilRoot>
+          <Home />
+        </RecoilRoot>
+      );
     });
 
     expect(axios.get).toHaveBeenCalledWith(
@@ -23,14 +28,20 @@ describe("home", function () {
       expect(screen.getByTestId("photoAlbum")).toBeInTheDocument();
     });
     await waitFor(() => {
-      expect(screen.getByText("No photos could be retrieved for the selected album")).not.toBeInTheDocument();
+      expect(
+        screen.getByText("No photos could be retrieved for the selected album")
+      ).not.toBeInTheDocument();
     });
   });
   it("should fetch new album when selectedAlbum changed", async () => {
     const mockReturn = { data: [{ src: "google.com", width: 1, height: 1 }] };
     axios.get.mockResolvedValue(mockReturn);
     await act(async () => {
-      render(<Home />);
+      render(
+        <RecoilRoot>
+          <Home />
+        </RecoilRoot>
+      );
     });
 
     expect(axios.get).toHaveBeenCalledWith(
@@ -52,14 +63,20 @@ describe("home", function () {
     const mockReturn = { data: [{ src: "google.com", width: 1, height: 1 }] };
     axios.get.mockRejectedValue(mockReturn);
     await act(async () => {
-      render(<Home />);
+      render(
+        <RecoilRoot>
+          <Home />
+        </RecoilRoot>
+      );
     });
 
     expect(axios.get).toHaveBeenCalledWith(
       "https://jsonplaceholder.typicode.com/photos?albumId=1"
     );
     await waitFor(() => {
-      expect(screen.getByText("No photos could be retrieved for the selected album")).toBeInTheDocument();
+      expect(
+        screen.getByText("No photos could be retrieved for the selected album")
+      ).toBeInTheDocument();
     });
   });
 });
