@@ -22,6 +22,9 @@ describe("home", function () {
     await waitFor(() => {
       expect(screen.getByTestId("photoAlbum")).toBeInTheDocument();
     });
+    await waitFor(() => {
+      expect(screen.getByText("No photos could be retrieved for the selected album")).not.toBeInTheDocument();
+    });
   });
   it("should fetch new album when selectedAlbum changed", async () => {
     const mockReturn = { data: [{ src: "google.com", width: 1, height: 1 }] };
@@ -43,6 +46,20 @@ describe("home", function () {
     );
     await waitFor(() => {
       expect(screen.getByTestId("photoAlbum")).toBeInTheDocument();
+    });
+  });
+  it("should show alert if photos not fetch", async () => {
+    const mockReturn = { data: [{ src: "google.com", width: 1, height: 1 }] };
+    axios.get.mockRejectedValue(mockReturn);
+    await act(async () => {
+      render(<Home />);
+    });
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://jsonplaceholder.typicode.com/photos?albumId=1"
+    );
+    await waitFor(() => {
+      expect(screen.getByText("No photos could be retrieved for the selected album")).toBeInTheDocument();
     });
   });
 });

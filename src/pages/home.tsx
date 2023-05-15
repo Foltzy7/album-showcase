@@ -21,11 +21,19 @@ export default function Home() {
   const [photos, setPhotos] = useState([]);
   let fetched = false;
 
+  const noPhotos = () => {
+    return fetched && photos?.length === 0;
+  };
   useEffect(() => {
     const fetchData = async () => {
-      const photosResponse = await axios.get(
-        `https://jsonplaceholder.typicode.com/photos?albumId=${selectedAlbum}`
-      );
+      let photosResponse: any = { data: [] };
+      try {
+        photosResponse = await axios.get(
+          `https://jsonplaceholder.typicode.com/photos?albumId=${selectedAlbum}`
+        );
+      } catch (e) {
+        console.warn("error retrieveing photos");
+      }
       const photoArray = photosResponse.data;
       setPhotos(
         photoArray.map((item: photoObject) => {
@@ -58,9 +66,14 @@ export default function Home() {
             />
           </div>
         </div>
-        {fetched && (
+        {!noPhotos && (
           <div data-testid="photoAlbum">
             <PhotoAlbum photos={photos} layout={"masonry"} />
+          </div>
+        )}
+        {noPhotos && (
+          <div className={"alert alert-danger"} role={"alert"}>
+            No photos could be retrieved for the selected album
           </div>
         )}
       </div>
