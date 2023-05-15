@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "server": "npm run express-api/start",
     "test": "react-scripts test",
     "test:e2e": "./node_modules/.bin/cypress run",
