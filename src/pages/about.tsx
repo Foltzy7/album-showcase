@@ -48,7 +48,8 @@ function About() {
             the latest versions of React and it's dependencies, but opted to
             reuse this project as it isn't too far out-of-date. This also give
             one the additional nostalgia of maintaining an existing codebase
-            within an established product <FontAwesomeIcon icon="gem" className="mr-sm-1" />.
+            within an established product{" "}
+            <FontAwesomeIcon icon="gem" className="mr-sm-1" />.
           </p>
           <p>
             <strong>Architecture features:</strong>
@@ -64,18 +65,18 @@ function About() {
                 API's. I find this useful when don't have access to the real
                 API's or for experimentation.
               </li>
+              <li>
+                <a href={"https://www.npmjs.com/package/react-photo-album"}>
+                  react-photo-gallery
+                </a>{" "}
+                was used to displaying the grid of photos in the selected album.
+                I added my own photo renderer for this to use in order to
+                provide the option to click on an image and preview it in full
+                size.
+              </li>
             </ul>
           </p>
         </div>
-        <a
-          className="btn btn-link"
-          href={"https://www.scooterscoffee.com/"}
-          rel={"noopener noreferrer"}
-          target={"_blank"}
-        >
-          <FontAwesomeIcon icon="coffee" spin={true} className="mr-sm-1" />
-          Coffee
-        </a>
       </div>
     </PageContent>
   );

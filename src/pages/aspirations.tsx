@@ -16,6 +16,8 @@ function Aspirations() {
           <ul>
             <li>Get min/max albums dynamically</li>
             <li>Pagination of images to reduce page load</li>
+            <li>Utilize thumbnails to display more items on the page</li>
+            <li>Added more testing around photo modal logic</li>
           </ul>
         </div>
         <a

@@ -20,7 +20,7 @@ function Header() {
           </Nav.Link>
           <Nav.Link
             data-testid={"aspirations-nav"}
-            href="/minitries"
+            href="/aspirations"
             className="mr-5"
           >
             Aspirations

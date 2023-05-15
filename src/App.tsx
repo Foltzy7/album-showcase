@@ -12,6 +12,7 @@ import About from "./pages/about";
 import Header from "./components/layout/header";
 import Page from "./components/page/page";
 import { RecoilRoot } from "recoil";
+import Aspirations from "./pages/aspirations";
 
 library.add(fab, faCheckSquare, faCoffee);
 
@@ -33,6 +34,12 @@ function App() {
                           <Page name="about">
                             <Header />
                             <About />
+                          </Page>
+                        </Route>
+                        <Route path="/aspirations">
+                          <Page name="aspirations">
+                            <Header />
+                            <Aspirations />
                           </Page>
                         </Route>
                         <Route path="/">
